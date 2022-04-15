@@ -28,10 +28,19 @@ import ru.TagAll.tenderHackBack.application.auth.service.AuthService;
 @Slf4j
 public class AuthServiceImpl implements AuthService {
 
+    /**
+     * {@link CustomerRepository}.
+     */
     private final CustomerRepository customerRepository;
 
+    /**
+     * {@link TokenRepository}.
+     */
     private final TokenRepository tokenRepository;
 
+    /**
+     * {@link JwtUtils}.
+     */
     private final JwtUtils jwtUtils;
 
     /**
