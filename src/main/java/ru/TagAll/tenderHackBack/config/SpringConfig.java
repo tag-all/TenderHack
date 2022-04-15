@@ -1,0 +1,106 @@
+package ru.TagAll.tenderHackBack.config;
+
+import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import ru.TagAll.tenderHackBack.errors.ErrorDescription;
+import ru.TagAll.tenderHackBack.errors.HttpResponseUtils;
+import ru.TagAll.tenderHackBack.application.common.Endpoints;
+import ru.TagAll.tenderHackBack.errors.model.ApplicationErrorDto;
+
+import javax.servlet.http.HttpServletResponse;
+import java.util.Collections;
+
+@Configuration
+@EnableWebSecurity
+@RequiredArgsConstructor
+public class SpringConfig extends WebSecurityConfigurerAdapter {
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+                .cors()
+                .configurationSource(corsConfigurationSource())
+                .and()
+                .csrf()
+                .disable()
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .exceptionHandling()
+                .accessDeniedHandler(accessDeniedHandler())
+                .authenticationEntryPoint(authenticationEntryPoint())
+                .and()
+                .authorizeRequests()
+                .antMatchers(HttpMethod.POST, Endpoints.Auth.AUTH)
+                .permitAll()
+                .antMatchers(HttpMethod.POST, Endpoints.Auth.REGISTRATION)
+                .permitAll()
+                .antMatchers(AUTH_WHITELIST)
+                .permitAll()
+                .antMatchers(HttpMethod.POST, "/**")
+                .permitAll()
+                .antMatchers(HttpMethod.GET, "/**")
+                .permitAll()
+                .antMatchers(HttpMethod.OPTIONS, "/**")
+                .permitAll()
+                .anyRequest().authenticated();
+        http.headers().frameOptions().sameOrigin();
+    }
+
+    /**
+     * Конфигарация CORS.
+     */
+    private CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOriginPatterns(Collections.singletonList("*"));
+        configuration.setAllowCredentials(true);
+        configuration.setAllowedMethods(Collections.singletonList("*"));
+        configuration.setAllowedHeaders(Collections.singletonList("*"));
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.setAlwaysUseFullPath(true);
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
+
+    /**
+     * {@see AccessDeniedHandler}.
+     */
+    private AccessDeniedHandler accessDeniedHandler() {
+        ErrorDescription errorDescription = ErrorDescription.ACCESS_DENIED;
+        ApplicationErrorDto error = ApplicationErrorDto.of(errorDescription.getType(), errorDescription.getCode(),
+                errorDescription.getMessage());
+        return (request, response, ex) -> HttpResponseUtils.writeError(response, error,
+                HttpServletResponse.SC_FORBIDDEN);
+    }
+
+    /**
+     * {@see AuthenticationEntryPoint}.
+     */
+    private AuthenticationEntryPoint authenticationEntryPoint() {
+        ErrorDescription errorDescription = ErrorDescription.UNAUTHORIZED_ACCESS;
+        ApplicationErrorDto error = ApplicationErrorDto.of(errorDescription.getType(), errorDescription.getCode(),
+                errorDescription.getMessage());
+        return (request, response, ex) -> HttpResponseUtils.writeError(response, error,
+                HttpServletResponse.SC_UNAUTHORIZED);
+    }
+
+    private static final String[] AUTH_WHITELIST = {
+            "/authenticate",
+            "/swagger-resources/**",
+            "/swagger-ui/**",
+            "/v3/api-docs",
+            "/v3/api-docs/**",
+            "/webjars/**"
+    };
+
+}
