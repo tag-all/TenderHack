@@ -1,5 +1,6 @@
 package ru.TagAll.tenderHackBack.application.auth.service;
 
+import org.springframework.web.bind.annotation.RequestBody;
 import ru.TagAll.tenderHackBack.application.auth.model.AccessDto;
 import ru.TagAll.tenderHackBack.application.auth.model.RegistrationDto;
 import ru.TagAll.tenderHackBack.application.auth.model.TokenDto;
@@ -41,4 +42,6 @@ public interface AuthService {
      * @return ссылка на страницу востановления пароля.
      */
     String updatePassword(String email);
+
+    TokenDto updateAuthToken(AccessDto accessToken);
 }

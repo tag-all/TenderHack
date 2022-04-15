@@ -75,4 +75,9 @@ public class AuthController {
         return authService.updatePassword(email);
     }
 
+    @PostMapping(Endpoints.Auth.UPDATE_TOKEN)
+    public TokenDto updateAuthToken(@RequestBody AccessDto accessToken){
+        return authService.updateAuthToken(accessToken);
+    }
+
 }

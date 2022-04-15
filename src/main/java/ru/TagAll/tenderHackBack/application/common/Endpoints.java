@@ -14,6 +14,7 @@ public interface Endpoints {
         String REGISTRATION ="/auth/registration";
         String LOGOUT = "/auth/logout";
         String UPDATE_PASSWORD = "/auth/update/password";
+        String UPDATE_TOKEN = "/auth/update/token";
     }
 }
 

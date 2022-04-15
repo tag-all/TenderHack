@@ -16,12 +16,22 @@ public class JwtUtils {
     @Value("@{jwt.secret}")
     private String jwtSecret;
 
-    @Value("@{jwt.time}")
-    private String time;
-
     public String generateToken(String email) {
         Date now = new Date();
-        Date exp = Date.from(LocalDateTime.now().plusHours(Long.parseLong(time))
+        Date exp = Date.from(LocalDateTime.now().plusHours(1L)
+                .atZone(ZoneId.systemDefault()).toInstant());
+        return Jwts.builder()
+                .setSubject(email)
+                .setIssuedAt(now)
+                .setNotBefore(now)
+                .setExpiration(exp)
+                .signWith(SignatureAlgorithm.HS256, jwtSecret)
+                .compact();
+    }
+
+    public String generateAccessToken(String email) {
+        Date now = new Date();
+        Date exp = Date.from(LocalDateTime.now().plusHours(2L)
                 .atZone(ZoneId.systemDefault()).toInstant());
         return Jwts.builder()
                 .setSubject(email)

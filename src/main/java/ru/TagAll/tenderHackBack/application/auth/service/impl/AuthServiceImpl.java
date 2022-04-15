@@ -5,18 +5,18 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
+import ru.TagAll.tenderHackBack.application.auth.domain.Token;
+import ru.TagAll.tenderHackBack.application.auth.domain.TokenRepository;
+import ru.TagAll.tenderHackBack.application.auth.model.AccessDto;
+import ru.TagAll.tenderHackBack.application.auth.model.AuthDto;
+import ru.TagAll.tenderHackBack.application.auth.model.RegistrationDto;
+import ru.TagAll.tenderHackBack.application.auth.model.TokenDto;
+import ru.TagAll.tenderHackBack.application.auth.service.AuthService;
 import ru.TagAll.tenderHackBack.application.customer.domain.Customer;
 import ru.TagAll.tenderHackBack.application.customer.domain.CustomerRepository;
 import ru.TagAll.tenderHackBack.errors.ErrorDescription;
 import ru.TagAll.tenderHackBack.utils.ConvertorUtils;
 import ru.TagAll.tenderHackBack.utils.JwtUtils;
-import ru.TagAll.tenderHackBack.application.auth.domain.Token;
-import ru.TagAll.tenderHackBack.application.auth.domain.TokenRepository;
-import ru.TagAll.tenderHackBack.application.auth.model.AuthDto;
-import ru.TagAll.tenderHackBack.application.auth.model.AccessDto;
-import ru.TagAll.tenderHackBack.application.auth.model.RegistrationDto;
-import ru.TagAll.tenderHackBack.application.auth.model.TokenDto;
-import ru.TagAll.tenderHackBack.application.auth.service.AuthService;
 
 /**
  * Логика сервисе авторизации.
@@ -51,7 +51,7 @@ public class AuthServiceImpl implements AuthService {
      */
     @Override
     public TokenDto auth(AuthDto authDto) {
-        log.info("auth init({})", authDto);
+        log.info("auth init()");
         Customer customer = customerRepository.getCustomerByEmail(authDto.getLogin());
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         ErrorDescription.CUSTOMER_NOT_FOUND.throwIfTrue(ObjectUtils.isEmpty(customer));
@@ -59,7 +59,7 @@ public class AuthServiceImpl implements AuthService {
                 customer.getPassword()));
         Token token = new Token();
         token.setCustomer(customer);
-        token.setToken(jwtUtils.generateToken(customer.getEmail().concat(customer.getPassword()
+        token.setToken(jwtUtils.generateAccessToken(customer.getEmail().concat(customer.getPassword()
                 .concat(customer.getId().toString()))));
         tokenRepository.save(token);
         log.info("auth completed");
@@ -74,13 +74,13 @@ public class AuthServiceImpl implements AuthService {
      */
     @Override
     public TokenDto registration(RegistrationDto registrationDto) {
-        log.info("registration init({})", registrationDto);
+        log.info("registration init()");
         ErrorDescription.CUSTOMER_FOUND.throwIfFalse(ObjectUtils.isEmpty(customerRepository
                 .getCustomerByEmail(registrationDto.getLogin())));
         Customer customer = customerRepository.save(ConvertorUtils.convertRegistrationDtoToCustomer(registrationDto));
         Token token = new Token();
         token.setCustomer(customer);
-        token.setToken(jwtUtils.generateToken(customer.getEmail().concat(customer.getPassword()
+        token.setToken(jwtUtils.generateAccessToken(customer.getEmail().concat(customer.getPassword()
                 .concat(customer.getId().toString()))));
         tokenRepository.save(token);
         log.info("registration completed");
@@ -94,7 +94,7 @@ public class AuthServiceImpl implements AuthService {
      */
     @Override
     public void logout(AccessDto accessToken) {
-        log.info("logout init({})", accessToken);
+        log.info("logout init()");
         ErrorDescription.CUSTOMER_LOGOUT_ERROR.throwIfTrue(ObjectUtils.isEmpty(tokenRepository
                 .getTokenByToken(accessToken.getAccessToken())));
         tokenRepository.delete(tokenRepository.getTokenByToken(accessToken.getAccessToken()));
@@ -110,6 +110,14 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public String updatePassword(String email) {
         return null;
+    }
+
+    @Override
+    public TokenDto updateAuthToken(AccessDto accessToken) {
+        ErrorDescription.ACCESS_DENIED.throwIfFalse(jwtUtils.validateToken(accessToken.getAccessToken()));
+        return TokenDto.of(jwtUtils.generateToken(
+                tokenRepository.getTokenByToken(accessToken.getAccessToken()).getCustomer().getEmail()),
+                accessToken.getAccessToken());
     }
 
 }
