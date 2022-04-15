@@ -25,7 +25,7 @@ create table bot_settings
     session_id  int  not null,
     priority    int  not null,
     time_delay  time not null,
-    time_lost   time,
+    time_start  time,
     step        real not null,
     min_payment real not null,
     status_work boolean default false
