@@ -25,6 +25,7 @@ create table bot_settings
     session_id  int  not null,
     priority    int  not null,
     time_delay  time not null,
+    time_lost   time,
     step        real not null,
     min_payment real not null,
     status_work boolean default false
@@ -35,6 +36,7 @@ create table message
 (
     id           int primary key,
     type         varchar(16) not null,
+    name         varchar(64) not null,
     message_text text
 );
 
