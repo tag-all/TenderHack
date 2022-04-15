@@ -30,7 +30,7 @@ create table bot_settings
     status_work boolean default false
 );
 
-create sequence notification start 1;
+create sequence message_seq start 1;
 create table message
 (
     id           int primary key,

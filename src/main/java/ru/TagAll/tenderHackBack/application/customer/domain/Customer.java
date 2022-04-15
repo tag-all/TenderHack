@@ -1,12 +1,31 @@
 package ru.TagAll.tenderHackBack.application.customer.domain;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 import ru.TagAll.tenderHackBack.application.auth.domain.Token;
-import ru.TagAll.tenderHackBack.application.common.ApplicationRoles;
+import ru.TagAll.tenderHackBack.application.bot.domain.BotSettings;
+import ru.TagAll.tenderHackBack.application.notification.domain.Notification;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import java.sql.Time;
 import java.util.List;
 
+/**
+ * Пользователь.
+ *
+ * @author Iurii Babalin.
+ */
 @Data
 @Entity
 @Table(name = "customer")
@@ -23,30 +42,24 @@ public class Customer {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "email_confirmed")
-    private Boolean emailConfirmed;
-
     @Column(name = "password")
     private String password;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "company_name")
+    private String companyName;
 
-    @Column(name = "last_name")
-    private String lastName;
+    @Column(name = "access_key")
+    private String accessKey;
 
-    @Column(name = "patronymic")
-    private String patronymic;
+    @Column(name = "notification_time")
+    private Time notificationTime;
 
-    @Column(name = "phone")
-    private String phone;
-
-    @Column(name = "code_region")
-    private String codeRegion;
-
-    @Column(name = "role")
-    private ApplicationRoles role;
-
-    @OneToMany(mappedBy = "customerId", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     List<Token> tokenList;
+
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    List<BotSettings> botSettingsList;
+
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    List<Notification> notificationsList;
 }

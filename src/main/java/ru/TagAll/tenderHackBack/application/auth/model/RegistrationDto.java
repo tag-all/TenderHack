@@ -11,11 +11,5 @@ import lombok.Data;
 @Data
 public class RegistrationDto extends AuthDto {
     @Schema(name = "Имя пользователя")
-    private String name;
-    @Schema(name = "Фамилия пользователя")
-    private String lastName;
-    @Schema(name = "Отчество пользователя")
-    private String patronymic;
-    @Schema(name = "Телефон пользователя")
-    private String phone;
+    private String companyName;
 }

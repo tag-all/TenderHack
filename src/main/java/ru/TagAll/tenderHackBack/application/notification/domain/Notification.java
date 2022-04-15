@@ -1,4 +1,4 @@
-package ru.TagAll.tenderHackBack.application.auth.domain;
+package ru.TagAll.tenderHackBack.application.notification.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,28 +18,31 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 /**
- * Токены пользователя.
+ * Уведомление.
  *
  * @author Iurii Babalin.
  */
 @Data
 @Entity
-@Table(name = "token")
+@Table(name = "notification")
 @ToString(of = "id")
 @EqualsAndHashCode(of = "id")
 @AllArgsConstructor(staticName = "of")
 @NoArgsConstructor
-public class Token {
+public class Notification {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "token_seq")
-    @SequenceGenerator(name = "token_seq", sequenceName = "token_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "notification_seq")
+    @SequenceGenerator(name = "notification_seq", sequenceName = "notification_seq", allocationSize = 1)
     private Long id;
 
     @ManyToOne()
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
-    @Column(name = "token")
-    private String token;
+    @ManyToOne()
+    @JoinColumn(name = "message_id")
+    private Message message;
 
+    @Column(name = "read_status")
+    private Boolean readStatus;
 }

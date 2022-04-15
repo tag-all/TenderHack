@@ -4,7 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Data
-public class LogoutDto {
+public class AccessDto {
     @Schema(name = "Токен доступа")
     private String accessToken;
 }

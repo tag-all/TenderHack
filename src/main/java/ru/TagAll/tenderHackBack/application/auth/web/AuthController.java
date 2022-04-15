@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import ru.TagAll.tenderHackBack.application.auth.model.AuthDto;
-import ru.TagAll.tenderHackBack.application.auth.model.LogoutDto;
+import ru.TagAll.tenderHackBack.application.auth.model.AccessDto;
 import ru.TagAll.tenderHackBack.application.auth.model.RegistrationDto;
 import ru.TagAll.tenderHackBack.application.auth.model.TokenDto;
 import ru.TagAll.tenderHackBack.application.auth.service.AuthService;
@@ -59,7 +59,7 @@ public class AuthController {
      */
     @BadRequestSystemError
     @PostMapping(value = Endpoints.Auth.LOGOUT)
-    public void logout(@RequestBody LogoutDto accessToken) {
+    public void logout(@RequestBody AccessDto accessToken) {
         authService.logout(accessToken);
     }
 

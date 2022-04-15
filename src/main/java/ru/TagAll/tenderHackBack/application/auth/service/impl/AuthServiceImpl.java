@@ -13,7 +13,7 @@ import ru.TagAll.tenderHackBack.utils.JwtUtils;
 import ru.TagAll.tenderHackBack.application.auth.domain.Token;
 import ru.TagAll.tenderHackBack.application.auth.domain.TokenRepository;
 import ru.TagAll.tenderHackBack.application.auth.model.AuthDto;
-import ru.TagAll.tenderHackBack.application.auth.model.LogoutDto;
+import ru.TagAll.tenderHackBack.application.auth.model.AccessDto;
 import ru.TagAll.tenderHackBack.application.auth.model.RegistrationDto;
 import ru.TagAll.tenderHackBack.application.auth.model.TokenDto;
 import ru.TagAll.tenderHackBack.application.auth.service.AuthService;
@@ -58,7 +58,7 @@ public class AuthServiceImpl implements AuthService {
         ErrorDescription.CUSTOMER_PASSWORD_ERROR.throwIfFalse(passwordEncoder.matches(authDto.getPassword(),
                 customer.getPassword()));
         Token token = new Token();
-        token.setCustomerId(customer);
+        token.setCustomer(customer);
         token.setToken(jwtUtils.generateToken(customer.getEmail().concat(customer.getPassword()
                 .concat(customer.getId().toString()))));
         tokenRepository.save(token);
@@ -79,7 +79,7 @@ public class AuthServiceImpl implements AuthService {
                 .getCustomerByEmail(registrationDto.getLogin())));
         Customer customer = customerRepository.save(ConvertorUtils.convertRegistrationDtoToCustomer(registrationDto));
         Token token = new Token();
-        token.setCustomerId(customer);
+        token.setCustomer(customer);
         token.setToken(jwtUtils.generateToken(customer.getEmail().concat(customer.getPassword()
                 .concat(customer.getId().toString()))));
         tokenRepository.save(token);
@@ -93,7 +93,7 @@ public class AuthServiceImpl implements AuthService {
      * @param accessToken токен доступа.
      */
     @Override
-    public void logout(LogoutDto accessToken) {
+    public void logout(AccessDto accessToken) {
         log.info("logout init({})", accessToken);
         ErrorDescription.CUSTOMER_LOGOUT_ERROR.throwIfTrue(ObjectUtils.isEmpty(tokenRepository
                 .getTokenByToken(accessToken.getAccessToken())));

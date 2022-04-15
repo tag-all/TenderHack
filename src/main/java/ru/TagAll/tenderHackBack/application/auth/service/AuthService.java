@@ -1,6 +1,6 @@
 package ru.TagAll.tenderHackBack.application.auth.service;
 
-import ru.TagAll.tenderHackBack.application.auth.model.LogoutDto;
+import ru.TagAll.tenderHackBack.application.auth.model.AccessDto;
 import ru.TagAll.tenderHackBack.application.auth.model.RegistrationDto;
 import ru.TagAll.tenderHackBack.application.auth.model.TokenDto;
 import ru.TagAll.tenderHackBack.application.auth.model.AuthDto;
@@ -32,7 +32,7 @@ public interface AuthService {
      *
      * @param accessToken токен доступа.
      */
-    void logout(LogoutDto accessToken);
+    void logout(AccessDto accessToken);
 
     /**
      * Обновленеи пароля.
