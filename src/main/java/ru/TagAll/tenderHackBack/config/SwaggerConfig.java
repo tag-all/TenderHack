@@ -32,11 +32,11 @@ public class SwaggerConfig {
     public static final String AUTHORIZATION_HEADER = "Authorization";
 
     private ApiInfo apiInfo() {
-        return new ApiInfo("IoT-app",
-                "Проект умного дома",
+        return new ApiInfo("Tender-Hack-app",
+                "Проект для Tender Hack",
                 "1.0",
                 "",
-                "Бабалин Юрий",
+                "TagAll Team",
                 "",
                 "");
     }
