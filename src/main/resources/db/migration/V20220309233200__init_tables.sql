@@ -22,11 +22,11 @@ create table bot_settings
 (
     id          int primary key,
     customer_id int references customer (id),
-    session_id  int    not null,
-    priority    int    not null,
-    time_delay  time   not null,
-    step        double not null,
-    min_payment double not null,
+    session_id  int  not null,
+    priority    int  not null,
+    time_delay  time not null,
+    step        real not null,
+    min_payment real not null,
     status_work boolean default false
 );
 
@@ -36,7 +36,7 @@ create table message
     id           int primary key,
     type         varchar(16) not null,
     message_text text
-)
+);
 
 create sequence notification_seq start 1;
 create table notification

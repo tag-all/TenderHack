@@ -44,5 +44,5 @@ public class Message {
     private String text;
 
     @OneToMany(mappedBy = "message", cascade = CascadeType.ALL)
-    List<Notification> notificationsList;
+    private List<Notification> notificationsList;
 }

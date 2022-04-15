@@ -7,7 +7,7 @@ spring:
   datasource:
     platform: postgres
     driverClassName: org.postgresql.Driver
-    url: postgres://wkbvnhaqrxrioo:72c1517ee7bfa1a4cd801bcb3efb20187f0e8a95d5c1282f1223b68cd9ad54f8@ec2-52-48-159-67.eu-west-1.compute.amazonaws.com:5432/dffvicsks1i8v6
+    url: jdbc:postgresql://ec2-52-48-159-67.eu-west-1.compute.amazonaws.com:5432/dffvicsks1i8v6
     username: wkbvnhaqrxrioo
     password: 72c1517ee7bfa1a4cd801bcb3efb20187f0e8a95d5c1282f1223b68cd9ad54f8
   jpa:

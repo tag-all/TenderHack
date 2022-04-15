@@ -9,9 +9,4 @@ import ru.TagAll.tenderHackBack.application.bot.servcie.BotService;
 @RequiredArgsConstructor
 @Api(tags = "Контроллер натсройки бота")
 public class BotController {
-
-    /**
-     * {@link BotService}.
-     */
-    private final BotService botService;
 }

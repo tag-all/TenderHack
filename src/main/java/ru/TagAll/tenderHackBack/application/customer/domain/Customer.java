@@ -55,11 +55,11 @@ public class Customer {
     private Time notificationTime;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-    List<Token> tokenList;
+    private List<Token> tokenList;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-    List<BotSettings> botSettingsList;
+    private List<BotSettings> botSettingsList;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-    List<Notification> notificationsList;
+    private List<Notification> notificationsList;
 }
