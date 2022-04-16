@@ -42,4 +42,7 @@ public class NotificationServiceImpl implements NotificationService {
         Customer customer = (Customer) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return notificationRepository.countNotificationByCustomerAndMessage_Type(customer, NotificationType.valueOf(noticeType));
     }
+
+
+
 }
