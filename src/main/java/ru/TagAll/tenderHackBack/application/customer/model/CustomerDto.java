@@ -9,5 +9,6 @@ import lombok.Data;
 public class CustomerDto {
     private String email;
     private String companyName;
+    private String accessKey;
     private String notificationDelay;
 }

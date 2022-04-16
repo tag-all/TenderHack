@@ -48,4 +48,9 @@ public interface CustomerService {
      */
     void placeManualBet(Long sessionID);
 
+    /**
+     * Обновление профиля пользователя.
+     */
+    void updateProfile(CustomerDto customerDto);
+
 }

@@ -38,6 +38,12 @@ public class CustomerController {
     }
 
     @BadRequestSystemError
+    @PostMapping(Endpoints.Customer.PROFILE_UPDATE)
+    public void updateProfile(@RequestBody CustomerDto customerDto){
+        customerService.updateProfile(customerDto);
+    }
+
+    @BadRequestSystemError
     @GetMapping(value = Endpoints.Customer.MANUAL_SESSIONS)
     public List<SessionDto> getManualSessions() {
         return customerService.getAllManualSessions();

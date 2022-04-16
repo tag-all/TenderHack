@@ -43,6 +43,7 @@ public interface Endpoints {
      */
     interface Customer{
         String GET_CUSTOMER_PROFILE = "/customer/profile";
+        String PROFILE_UPDATE = "/customer/profile/save";
         String AUTO_SESSIONS = "/customer/auto/sessions";
         String MANUAL_SESSIONS = "/customer/manual/sessions";
         String ACTIVE_SESSIONS = "customer/session/active";

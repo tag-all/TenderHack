@@ -5,11 +5,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import ru.TagAll.tenderHackBack.application.customer.domain.Customer;
+import ru.TagAll.tenderHackBack.application.customer.domain.CustomerRepository;
 import ru.TagAll.tenderHackBack.application.customer.model.CustomerDto;
 import ru.TagAll.tenderHackBack.application.customer.model.SessionDto;
 import ru.TagAll.tenderHackBack.application.customer.service.CustomerService;
 import ru.TagAll.tenderHackBack.utils.ConvertorUtils;
 
+import java.sql.Time;
 import java.util.List;
 
 
@@ -24,6 +26,11 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class CustomerServiceImpl implements CustomerService {
+
+    /**
+     * {@link CustomerRepository}.
+     */
+    private final CustomerRepository customerRepository;
 
     /**
      * Получение данных опользователе.
@@ -58,5 +65,15 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public void placeManualBet(Long sessionID) {
+    }
+
+    @Override
+    public void updateProfile(CustomerDto customerDto) {
+        Customer customer = (Customer) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        customer.setCompanyName(customerDto.getCompanyName());
+        customer.setEmail(customerDto.getEmail());
+        customer.setAccessKey(customerDto.getAccessKey());
+        customer.setNotificationTime(Time.valueOf(customerDto.getNotificationDelay()));
+        customerRepository.save(customer);
     }
 }
