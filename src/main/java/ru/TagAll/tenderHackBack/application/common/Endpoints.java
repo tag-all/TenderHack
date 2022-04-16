@@ -25,5 +25,11 @@ public interface Endpoints {
         String NOTICES_BY_TYPE = "/customer/notification/{notificationType}";
         String COUNTING_NOTICES = "/customer/notification/{notificationType}/count";
     }
+
+    interface Customer{
+        String GET_CUSTOMER_PROFILE = "/customer/profile";
+        String AUTO_SESSIONS = "/customer/auto/sessions";
+        String MANUAL_SESSIONS = "/customer/manual/sessions";
+    }
 }
 
