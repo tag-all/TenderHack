@@ -39,6 +39,7 @@ public class ConvertorUtils {
         customerDto.setEmail(customer.getEmail());
         customerDto.setCompanyName(customer.getCompanyName());
         customerDto.setNotificationDelay(customer.getNotificationTime().toString());
+        customerDto.setAccessKey(customer.getAccessKey());
         return customerDto;
     }
 }
