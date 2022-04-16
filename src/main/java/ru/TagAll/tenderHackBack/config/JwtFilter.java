@@ -1,6 +1,5 @@
 package ru.TagAll.tenderHackBack.config;
 
-import lombok.AllArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
