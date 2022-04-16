@@ -17,8 +17,10 @@ import javax.validation.constraints.NotBlank;
 @ConfigurationProperties(prefix = "out-system")
 public class OutSystemConfiguration {
 
+    @NotBlank(message = "Отсутствует значение параметра out-system.url")
     private String url;
 
+    @NotBlank(message = "Отсутствует значение параметра out-system.key")
     private String key;
 
     private Endpoints endpoints;

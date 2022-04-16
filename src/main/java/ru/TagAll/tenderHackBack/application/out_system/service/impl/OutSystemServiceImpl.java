@@ -58,8 +58,8 @@ public class OutSystemServiceImpl implements OutSystemService {
         headers.add("CustomerKey", "Key: ".concat(customerKey));
         headers.add("SystemKey", "Key: ".concat(outSystemConfiguration.getKey()));
         HttpEntity<String> requestEntity = new HttpEntity<>(headers);
-        HttpStatus status = outSystemRestTemplate.exchange(url, HttpMethod.GET, requestEntity,
-                String.class, sessionId).getStatusCode();
-        ErrorDescription.OUT_SYSTEM_BET_ERROR.throwIfTrue(status.isError());
+        int status = outSystemRestTemplate.exchange(url, HttpMethod.POST, requestEntity,
+                String.class, sessionId).getStatusCodeValue();
+        ErrorDescription.OUT_SYSTEM_BET_ERROR.throwIfTrue(status != 200);
     }
 }
