@@ -20,11 +20,6 @@ public interface BotService {
     void stopBot(Long sessionId);
 
     /**
-     * изменение интервала отправки (задержки) для бота для конкретной сессии
-     */
-    void changeDelay(Long sessionId, DelayDto delayDto);
-
-    /**
      * сохранение настроек бота для конкретной сессии
      */
     void settingBotSave(Long sessionId, BotSettingDto setting);

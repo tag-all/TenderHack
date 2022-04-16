@@ -32,11 +32,6 @@ public class BotController {
         botService.stopBot(sessionId);
     }
 
-    @BadRequestSystemError
-    @PostMapping(value = Endpoints.Bot.CHANGE_DELAY)
-    public void changeDelay(@PathVariable Long sessionId, @RequestBody DelayDto delay) {
-        botService.changeDelay(sessionId, delay);
-    }
 
     @BadRequestSystemError
     @PostMapping(value = Endpoints.Bot.SETTING_BOT_SAVE)

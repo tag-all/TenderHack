@@ -28,11 +28,6 @@ public class BotServiceImpl implements BotService {
     }
 
     @Override
-    public void changeDelay(Long sessionId, DelayDto delayDto) {
-
-    }
-
-    @Override
     public void settingBotSave(Long sessionId, BotSettingDto setting) {
 
     }

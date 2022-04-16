@@ -33,7 +33,6 @@ public interface Endpoints {
     interface Bot{
         String START_BOT = "/bot/session/{sessionId}/start";
         String STOP_BOT = "/bot/session/{sessionId}/stop";
-        String CHANGE_DELAY = "/bot/session/{sessionId}/profile/update";
         String SETTING_BOT_SAVE = "bot/session/{sessionId}/settings/save";
         String SETTING_BOT_GET = "bot/session/{sessionId}/settings";
     }
