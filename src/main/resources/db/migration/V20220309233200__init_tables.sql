@@ -24,7 +24,7 @@ create table status_session
     customer_id int references customer (id),
     session_id  int         not null,
     status      varchar(16) not null,
-    operating_mode boolean default false,
+    operating_mode boolean default false
 );
 
 create sequence bot_settings_seq start 1;
