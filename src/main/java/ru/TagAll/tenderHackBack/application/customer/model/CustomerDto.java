@@ -11,5 +11,5 @@ import java.sql.Time;
 public class CustomerDto {
     private String email;
     private String companyName;
-    private Time notificationDelay;
+    private String notificationDelay;
 }

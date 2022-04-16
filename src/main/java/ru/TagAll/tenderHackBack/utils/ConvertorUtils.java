@@ -38,7 +38,7 @@ public class ConvertorUtils {
         CustomerDto customerDto = new CustomerDto();
         customerDto.setEmail(customer.getEmail());
         customerDto.setCompanyName(customer.getCompanyName());
-        customer.setNotificationTime(customer.getNotificationTime());
+        customerDto.setNotificationDelay(customer.getNotificationTime().toString());
         return customerDto;
     }
 }
