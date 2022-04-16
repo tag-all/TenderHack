@@ -3,6 +3,7 @@ package ru.TagAll.tenderHackBack.utils;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import ru.TagAll.tenderHackBack.application.auth.model.RegistrationDto;
 import ru.TagAll.tenderHackBack.application.customer.domain.Customer;
+import ru.TagAll.tenderHackBack.application.customer.model.CustomerDto;
 import ru.TagAll.tenderHackBack.application.notification.domain.Notification;
 import ru.TagAll.tenderHackBack.application.notification.model.NotificationDto;
 
@@ -31,5 +32,13 @@ public class ConvertorUtils {
             result.add(notificationDto);
         }
         return result;
+    }
+
+    public static CustomerDto convertCustomerToCustomerDto(Customer customer){
+        CustomerDto customerDto = new CustomerDto();
+        customerDto.setEmail(customer.getEmail());
+        customerDto.setCompanyName(customer.getCompanyName());
+        customer.setNotificationTime(customer.getNotificationTime());
+        return customerDto;
     }
 }

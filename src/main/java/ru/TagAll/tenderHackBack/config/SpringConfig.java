@@ -51,12 +51,6 @@ public class SpringConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .antMatchers(AUTH_WHITELIST)
                 .permitAll()
-                .antMatchers(HttpMethod.POST, "/**")
-                .permitAll()
-                .antMatchers(HttpMethod.GET, "/**")
-                .permitAll()
-                .antMatchers(HttpMethod.OPTIONS, "/**")
-                .permitAll()
                 .anyRequest().authenticated();
         http.headers().frameOptions().sameOrigin();
     }
