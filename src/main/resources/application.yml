@@ -24,10 +24,17 @@ server:
     context-path: /api/v1
 
 jwt:
-  secret: 't$%^en@der112HAcK@##'
+  secret: "t$%^en@der112HAcK@##"
 
+out-system:
+  url: "https://emulate-tender-hack.herokuapp.com/api/v1"
+  key: "2db75760-bd8f-11ec-9d64-0242ac120002"
+  endpoints:
+    get-sessions: "/sessions/{sessionType}"
+    get-session: "/session/{sessionId}"
+    make-bet: "/session/{sessionId}/bet"
 
 mailSender:
-  subject: 'Tag All - уведомление о котировочной сессии'
+  subject: "Tag All - уведомление о котировочной сессии"
   userName:
   password:

@@ -1,10 +1,8 @@
 package ru.TagAll.tenderHackBack.application.customer.service;
 
 import ru.TagAll.tenderHackBack.application.customer.model.CustomerDto;
-import ru.TagAll.tenderHackBack.application.customer.model.SessionDto;
-
-import java.util.List;
-
+import ru.TagAll.tenderHackBack.application.out_system.model.SessionDto;
+import ru.TagAll.tenderHackBack.application.out_system.model.SessionsDto;
 
 
 /**
@@ -24,29 +22,29 @@ public interface CustomerService {
     /**
      * @return активные сессии
      */
-    List<SessionDto> getAllActiveSessions();
+    SessionsDto getAllActiveSessions();
 
     /**
      * @return сессии в ручном режиме
      */
-    List<SessionDto> getAllManualSessions();
+    SessionsDto getAllManualSessions();
 
     /**
      * @return сессии в автоматическом режиме
      */
-    List<SessionDto> getAllAutoSessions();
+    SessionsDto getAllAutoSessions();
 
     /**
-     * @param sessionID - id сессии
+     * @param sessionId - id сессии
      * @return инфрормацию о сессии
      */
-    SessionDto getSessionInfo(Long sessionID);
+    SessionDto getSessionInfo(Long sessionId);
 
     /**
-     * @param sessionID - id сессии
+     * @param sessionId - id сессии
      * @return реазультат - удалась ли ставка
      */
-    void placeManualBet(Long sessionID);
+    void placeManualBet(Long sessionId);
 
     /**
      * Обновление профиля пользователя.

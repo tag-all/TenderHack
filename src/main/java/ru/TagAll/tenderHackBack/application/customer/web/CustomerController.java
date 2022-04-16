@@ -4,17 +4,15 @@ import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.TagAll.tenderHackBack.application.common.Endpoints;
-import ru.TagAll.tenderHackBack.application.customer.service.impl.CustomerServiceImpl;
-import ru.TagAll.tenderHackBack.application.customer.model.SessionDto;
+import ru.TagAll.tenderHackBack.application.out_system.model.SessionDto;
+import ru.TagAll.tenderHackBack.application.out_system.model.SessionsDto;
 import ru.TagAll.tenderHackBack.swagger.BadRequestSystemError;
 
 import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.TagAll.tenderHackBack.application.common.Endpoints;
 import ru.TagAll.tenderHackBack.application.customer.model.CustomerDto;
 import ru.TagAll.tenderHackBack.application.customer.service.CustomerService;
-import ru.TagAll.tenderHackBack.swagger.BadRequestSystemError;
 
 /**
  * Контроллер работы с пользователем.
@@ -33,7 +31,7 @@ public class CustomerController {
 
     @BadRequestSystemError
     @GetMapping(value = Endpoints.Customer.ACTIVE_SESSIONS)
-    public List<SessionDto> getActiveSessions() {
+    public SessionsDto getActiveSessions() {
         return customerService.getAllActiveSessions();
     }
 
@@ -45,13 +43,13 @@ public class CustomerController {
 
     @BadRequestSystemError
     @GetMapping(value = Endpoints.Customer.MANUAL_SESSIONS)
-    public List<SessionDto> getManualSessions() {
+    public SessionsDto getManualSessions() {
         return customerService.getAllManualSessions();
     }
 
     @BadRequestSystemError
     @GetMapping(value = Endpoints.Customer.AUTO_SESSIONS)
-    public List<SessionDto> getAutoSessions() {
+    public SessionsDto getAutoSessions() {
         return customerService.getAllAutoSessions();
     }
 
