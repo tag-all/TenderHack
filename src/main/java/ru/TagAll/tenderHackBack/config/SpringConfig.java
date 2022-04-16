@@ -26,6 +26,7 @@ import java.util.Collections;
 @RequiredArgsConstructor
 public class SpringConfig extends WebSecurityConfigurerAdapter {
 
+
     private final JwtFilter jwtFilter;
 
     @Override
