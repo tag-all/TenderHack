@@ -22,7 +22,7 @@ import java.sql.Time;
 import java.util.List;
 
 /**
- * Пользователь.
+ * Пользователь
  *
  * @author Iurii Babalin.
  */
