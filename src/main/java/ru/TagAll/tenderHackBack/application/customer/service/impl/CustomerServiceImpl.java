@@ -21,7 +21,6 @@ import java.util.List;
  * @author Iurii Babalin.
  * @author Semyon Shibaev.
  */
-
 @Slf4j
 @Service
 @AllArgsConstructor
@@ -70,10 +69,11 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void updateProfile(CustomerDto customerDto) {
         Customer customer = (Customer) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        customer.setCompanyName(customerDto.getCompanyName());
-        customer.setEmail(customerDto.getEmail());
-        customer.setAccessKey(customerDto.getAccessKey());
-        customer.setNotificationTime(Time.valueOf(customerDto.getNotificationDelay()));
-        customerRepository.save(customer);
+        Customer customerForSave = customerRepository.getCustomerByEmail(customer.getEmail());
+        customerForSave.setCompanyName(customerDto.getCompanyName());
+        customerForSave.setEmail(customerDto.getEmail());
+        customerForSave.setAccessKey(customerDto.getAccessKey());
+        customerForSave.setNotificationTime(Time.valueOf(customerDto.getNotificationDelay()));
+        customerRepository.save(customerForSave);
     }
 }
