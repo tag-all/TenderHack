@@ -10,8 +10,6 @@ import ru.TagAll.tenderHackBack.application.notification.model.NotificationDto;
 import ru.TagAll.tenderHackBack.application.notification.servcie.impl.NotificationServiceImpl;
 import ru.TagAll.tenderHackBack.swagger.BadRequestSystemError;
 
-import javax.servlet.http.HttpServletRequest;
-
 import java.util.List;
 
 
@@ -24,13 +22,13 @@ public class NotificationController {
 
     @BadRequestSystemError
     @GetMapping(value = Endpoints.Notice.NOTICES_BY_TYPE)
-    public List<NotificationDto> getNoticeByType(@PathVariable String notificationType){
+    public List<NotificationDto> getNoticeByType(@PathVariable String notificationType) {
         return noticeService.getNoticeByType(notificationType);
     }
 
     @BadRequestSystemError
     @GetMapping(value = Endpoints.Notice.COUNTING_NOTICES)
-    public int getCountNoticeByType(@PathVariable String notificationType){
+    public int getCountNoticeByType(@PathVariable String notificationType) {
         return noticeService.getCountTypedNotice(notificationType);
     }
 
