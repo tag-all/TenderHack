@@ -4,6 +4,7 @@ import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.TagAll.tenderHackBack.application.common.Endpoints;
+import ru.TagAll.tenderHackBack.application.customer.model.SessionsAuto;
 import ru.TagAll.tenderHackBack.application.out_system.model.SessionDto;
 import ru.TagAll.tenderHackBack.application.out_system.model.SessionsDto;
 import ru.TagAll.tenderHackBack.swagger.BadRequestSystemError;
@@ -49,7 +50,7 @@ public class CustomerController {
 
     @BadRequestSystemError
     @GetMapping(value = Endpoints.Customer.AUTO_SESSIONS)
-    public SessionsDto getAutoSessions() {
+    public SessionsAuto getAutoSessions() {
         return customerService.getAllAutoSessions();
     }
 

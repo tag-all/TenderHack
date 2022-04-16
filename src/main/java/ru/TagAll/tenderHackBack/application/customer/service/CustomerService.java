@@ -1,6 +1,7 @@
 package ru.TagAll.tenderHackBack.application.customer.service;
 
 import ru.TagAll.tenderHackBack.application.customer.model.CustomerDto;
+import ru.TagAll.tenderHackBack.application.customer.model.SessionsAuto;
 import ru.TagAll.tenderHackBack.application.out_system.model.SessionDto;
 import ru.TagAll.tenderHackBack.application.out_system.model.SessionsDto;
 
@@ -32,7 +33,7 @@ public interface CustomerService {
     /**
      * @return сессии в автоматическом режиме
      */
-    SessionsDto getAllAutoSessions();
+    SessionsAuto getAllAutoSessions();
 
     /**
      * @param sessionId - id сессии

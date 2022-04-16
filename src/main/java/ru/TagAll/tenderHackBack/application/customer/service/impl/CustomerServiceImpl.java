@@ -5,9 +5,16 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import ru.TagAll.tenderHackBack.application.bot.domain.BotSettings;
+import ru.TagAll.tenderHackBack.application.bot.domain.BotSettingsRepository;
+import ru.TagAll.tenderHackBack.application.bot.domain.StatusSession;
+import ru.TagAll.tenderHackBack.application.bot.domain.StatusSessionRepository;
+import ru.TagAll.tenderHackBack.application.bot.model.BotSettingDto;
 import ru.TagAll.tenderHackBack.application.customer.domain.Customer;
 import ru.TagAll.tenderHackBack.application.customer.domain.CustomerRepository;
 import ru.TagAll.tenderHackBack.application.customer.model.CustomerDto;
+import ru.TagAll.tenderHackBack.application.customer.model.SessionAuto;
+import ru.TagAll.tenderHackBack.application.customer.model.SessionsAuto;
 import ru.TagAll.tenderHackBack.application.customer.service.CustomerService;
 import ru.TagAll.tenderHackBack.application.out_system.model.SessionDto;
 import ru.TagAll.tenderHackBack.application.out_system.model.SessionsDto;
@@ -15,6 +22,7 @@ import ru.TagAll.tenderHackBack.application.out_system.service.OutSystemService;
 import ru.TagAll.tenderHackBack.utils.ConvertorUtils;
 
 import java.sql.Time;
+import java.util.stream.Collectors;
 
 
 /**
@@ -35,6 +43,10 @@ public class CustomerServiceImpl implements CustomerService {
 
     private final OutSystemService outSystemService;
 
+    private final StatusSessionRepository statusSessionRepository;
+
+    private final BotSettingsRepository botSettingsRepository;
+
     /**
      * Получение данных опользователе.
      *
@@ -54,12 +66,27 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public SessionsDto getAllManualSessions() {
-        return null;
+        Customer customer = (Customer) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        SessionsDto sessionsDto = new SessionsDto();
+        sessionsDto.setSessions(statusSessionRepository.getAllByCustomerAndAndOperatingMode(customer, false)
+                .stream().map(it -> outSystemService.getSessionById(it.getSessionId(), customer.getAccessKey()))
+                .collect(Collectors.toList()));
+        return sessionsDto;
     }
 
     @Override
-    public SessionsDto getAllAutoSessions() {
-        return null;
+    public SessionsAuto getAllAutoSessions() {
+        Customer customer = (Customer) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        SessionsAuto sessionsAuto = new SessionsAuto();
+        sessionsAuto.setSessions(statusSessionRepository.getAllByCustomerAndAndOperatingMode(customer, true)
+                .stream().map(it -> {
+                    SessionAuto sessionAuto = convertToSessionAuto(outSystemService.getSessionById(it.getSessionId(),
+                            customer.getAccessKey()));
+                    sessionAuto.setBotSettingDto(convertToBotSettingDto(botSettingsRepository.getByStatusSession(it)));
+                    return sessionAuto;
+                })
+                .collect(Collectors.toList()));
+        return sessionsAuto;
     }
 
     @Override
@@ -71,6 +98,13 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void placeManualBet(Long sessionId) {
         Customer customer = (Customer) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        SessionDto sessionDto = outSystemService.getSessionById(sessionId, customer.getAccessKey());
+        StatusSession statusSession = new StatusSession();
+        statusSession.setCustomer(customer);
+        statusSession.setSessionId(sessionId);
+        statusSession.setStatus(sessionDto.getStatus());
+        statusSession.setOperatingMode(false);
+        statusSessionRepository.save(statusSession);
         outSystemService.betToSession(sessionId, customer.getAccessKey());
     }
 
@@ -85,5 +119,29 @@ public class CustomerServiceImpl implements CustomerService {
         SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(customerForSave,
                 null, null));
         customerRepository.save(customerForSave);
+    }
+
+    private BotSettingDto convertToBotSettingDto(BotSettings botSettings) {
+        BotSettingDto botSettingDto = new BotSettingDto();
+        botSettingDto.setId(botSettings.getId());
+        botSettingDto.setPriority(botSettings.getPriority());
+        botSettingDto.setTimeDelay(String.valueOf(botSettings.getTimeDelay()));
+        botSettingDto.setMinPay(botSettings.getMinPayment());
+        return botSettingDto;
+    }
+
+    private SessionAuto convertToSessionAuto(SessionDto sessionDto){
+        SessionAuto sessionAuto = new SessionAuto();
+        sessionAuto.setId(sessionDto.getId());
+        sessionAuto.setSessionName(sessionDto.getSessionName());
+        sessionAuto.setCustomerName(sessionDto.getCustomerName());
+        sessionAuto.setCurrentPrice(sessionDto.getCurrentPrice());
+        sessionAuto.setStart(sessionDto.getStart());
+        sessionAuto.setEnd(sessionDto.getEnd());
+        sessionAuto.setBet(sessionDto.getBet());
+        sessionAuto.setLocation(sessionDto.getLocation());
+        sessionAuto.setLastCustomerBet(sessionDto.getLastCustomerBet());
+        sessionAuto.setStatus(sessionDto.getStatus());
+        return sessionAuto;
     }
 }

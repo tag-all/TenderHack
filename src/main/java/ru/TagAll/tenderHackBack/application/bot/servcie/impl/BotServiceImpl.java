@@ -80,12 +80,19 @@ public class BotServiceImpl implements BotService {
             statusSessionRepository.save(statusSession);
         } else {
             botSettings = botSettingsRepository.getByStatusSession(statusSession);
-            ErrorDescription.BOT_NOT_FOUNT.throwIfTrue(ObjectUtils.isEmpty(botSettings));
-            ErrorDescription.BOT_NOT_FOUNT.throwIfTrue(!botSettings.getId().equals(setting.getId()));
+            if (ObjectUtils.isEmpty(botSettings)) {
+                SessionDto sessionDto = outSystemService.getSessionById(sessionId, customer.getAccessKey());
+                botSettings = new BotSettings();
+                botSettings.setCustomer(customer);
+                botSettings.setStatusSession(statusSession);
+                botSettings.setStep(sessionDto.getBet());
+                statusSession.setOperatingMode(true);
+            }
             botSettings.setPriority(setting.getPriority());
             botSettings.setMinPayment(setting.getMinPay());
             botSettings.setTimeDelay(Time.valueOf(setting.getTimeDelay()));
-            botSettingsRepository.save(botSettings);
+            statusSession.setBotSettings(botSettings);
+            statusSessionRepository.save(statusSession);
         }
     }
 
