@@ -22,8 +22,8 @@ public interface Endpoints {
      *  Эндпоинты взаимодействия с сервисом отправки уведомлений.
      */
     interface Notice{
-        String NOTICES_BY_TYPE = "/customer/{customerId}/notification/{notificationType}";
-        String COUNTING_NOTICES = "/customer/{customerId}/notification/{notificationType}/count";
+        String NOTICES_BY_TYPE = "/customer/notification/{notificationType}";
+        String COUNTING_NOTICES = "/customer/notification/{notificationType}/count";
     }
 }
 

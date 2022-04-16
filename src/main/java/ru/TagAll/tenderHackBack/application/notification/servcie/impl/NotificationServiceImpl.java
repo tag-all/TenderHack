@@ -2,7 +2,9 @@ package ru.TagAll.tenderHackBack.application.notification.servcie.impl;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import ru.TagAll.tenderHackBack.application.customer.domain.Customer;
 import ru.TagAll.tenderHackBack.application.customer.domain.CustomerRepository;
 import ru.TagAll.tenderHackBack.application.notification.domain.MessageRepository;
 import ru.TagAll.tenderHackBack.application.notification.domain.Notification;
@@ -28,13 +30,16 @@ public class NotificationServiceImpl implements NotificationService {
     private final NotificationRepository notificationRepository;
 
     @Override
-    public List<NotificationDto> getNoticeByCustomerIdAndType(Long customerId, String noticeType) {
-        List<Notification> notifications = notificationRepository.findAllByCustomer_IdAndMessage_Type(customerId, NotificationType.valueOf(noticeType));
+    public List<NotificationDto> getNoticeByType(String noticeType) {
+        Customer customer = (Customer) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        List<Notification> notifications = notificationRepository.findAllByCustomerAndMessage_Type(customer, NotificationType.valueOf(noticeType));
         return convertNoticeToNoticeDto(notifications);
     }
 
+
     @Override
-    public int getCountTypedNotice(Long customerId, String noticeType) {
-        return notificationRepository.countNotificationByCustomer_IdAAndMessage_Type(customerId, NotificationType.valueOf(noticeType));
+    public int getCountTypedNotice(String noticeType) {
+        Customer customer = (Customer) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return notificationRepository.countNotificationByCustomerAndMessage_Type(customer, NotificationType.valueOf(noticeType));
     }
 }

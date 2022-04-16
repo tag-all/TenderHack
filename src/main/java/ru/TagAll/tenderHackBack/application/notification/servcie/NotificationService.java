@@ -11,20 +11,19 @@ import java.util.List;
 public interface NotificationService {
 
     /**
-     * @param customerId идентификатор пользователя
+     *
      * @param noticeType тип уведомления
      * @return лист уведомлений по типу
      */
 
-    List<NotificationDto> getNoticeByCustomerIdAndType(Long customerId, String noticeType);
+    List<NotificationDto> getNoticeByType(String noticeType);
 
     /**
-     * @param customerId идентификатор пользователя
      * @param noticeType тип уведомления
      * @return количество уведомлений по типу
      */
 
-    int getCountTypedNotice(Long customerId, String noticeType);
+    int getCountTypedNotice(String noticeType);
 
 
 
