@@ -2,8 +2,6 @@ package ru.TagAll.tenderHackBack.application.customer.model;
 
 import lombok.Data;
 
-import java.sql.Time;
-
 /**
  * Модель данных пользователя.
  */
