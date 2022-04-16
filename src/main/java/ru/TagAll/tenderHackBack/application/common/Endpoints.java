@@ -7,6 +7,7 @@ package ru.TagAll.tenderHackBack.application.common;
  * @author Semyon Shibaev.
  */
 public interface Endpoints {
+
     /**
      *  Эндпоинты взаимодействия с сервисом авторизации.
      */
@@ -21,15 +22,34 @@ public interface Endpoints {
     /**
      *  Эндпоинты взаимодействия с сервисом отправки уведомлений.
      */
-    interface Notice{
+    interface Notice {
         String NOTICES_BY_TYPE = "/customer/notification/{notificationType}";
         String COUNTING_NOTICES = "/customer/notification/{notificationType}/count";
     }
 
+    /**
+     *  Эндпоинты взаимодействия с сервисом взаиомдействия с системой автоматизации.
+     */
+    interface Bot{
+        String START_BOT = "/bot/session/{sessionId}/start";
+        String STOP_BOT = "/bot/session/{sessionId}/stop";
+        String CHANGE_DELAY = "/bot/session/{customerId}/profile/update";
+        String SETTING_BOT_SAVE = "bot/session/{customerId}/settings/save";
+        String SETTING_BOT_GET = "bot/session/{customerId}/settings/get";
+    }
+
+    /**
+     *  Эндпоинты взаимодействия с сервисом пользователя.
+     */
     interface Customer{
         String GET_CUSTOMER_PROFILE = "/customer/profile";
         String AUTO_SESSIONS = "/customer/auto/sessions";
         String MANUAL_SESSIONS = "/customer/manual/sessions";
+        String ACTIVE_SESSIONS = "customer//session/active";
+        String SESSION_INFO = "customer//session/{sessionId}";
+        String PLACE_BET = "customer/session/{sessionId}/bet";
     }
+
+
 }
 
