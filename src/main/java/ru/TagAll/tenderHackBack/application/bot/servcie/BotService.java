@@ -2,6 +2,7 @@ package ru.TagAll.tenderHackBack.application.bot.servcie;
 
 import ru.TagAll.tenderHackBack.application.bot.domain.BotSettings;
 import ru.TagAll.tenderHackBack.application.bot.model.BotSettingDto;
+import ru.TagAll.tenderHackBack.application.bot.model.DelayDto;
 
 /**
  * @author Semyon Shibaev.
@@ -21,7 +22,7 @@ public interface BotService {
     /**
      * изменение интервала отправки (задержки) для бота для конкретной сессии
      */
-    void changeDelay(Long sessionId);
+    void changeDelay(Long sessionId, DelayDto delayDto);
 
     /**
      * сохранение настроек бота для конкретной сессии
@@ -32,8 +33,5 @@ public interface BotService {
      * сохранение настроек бота для конкретной сессии
      */
     BotSettingDto settingBotGet(Long sessionId);
-
-
-
 
 }

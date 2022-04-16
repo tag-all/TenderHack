@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.TagAll.tenderHackBack.application.bot.model.BotSettingDto;
+import ru.TagAll.tenderHackBack.application.bot.model.DelayDto;
 import ru.TagAll.tenderHackBack.application.bot.servcie.BotService;
 
 /**
@@ -16,7 +17,6 @@ import ru.TagAll.tenderHackBack.application.bot.servcie.BotService;
 @Slf4j
 public class BotServiceImpl implements BotService {
 
-
     @Override
     public void startBot(Long sessionId) {
 
@@ -28,7 +28,7 @@ public class BotServiceImpl implements BotService {
     }
 
     @Override
-    public void changeDelay(Long sessionId) {
+    public void changeDelay(Long sessionId, DelayDto delayDto) {
 
     }
 

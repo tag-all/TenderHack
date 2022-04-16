@@ -33,9 +33,9 @@ public interface Endpoints {
     interface Bot{
         String START_BOT = "/bot/session/{sessionId}/start";
         String STOP_BOT = "/bot/session/{sessionId}/stop";
-        String CHANGE_DELAY = "/bot/session/{customerId}/profile/update";
-        String SETTING_BOT_SAVE = "bot/session/{customerId}/settings/save";
-        String SETTING_BOT_GET = "bot/session/{customerId}/settings/get";
+        String CHANGE_DELAY = "/bot/session/{sessionId}/profile/update";
+        String SETTING_BOT_SAVE = "bot/session/{sessionId}/settings/save";
+        String SETTING_BOT_GET = "bot/session/{sessionId}/settings";
     }
 
     /**
@@ -45,8 +45,8 @@ public interface Endpoints {
         String GET_CUSTOMER_PROFILE = "/customer/profile";
         String AUTO_SESSIONS = "/customer/auto/sessions";
         String MANUAL_SESSIONS = "/customer/manual/sessions";
-        String ACTIVE_SESSIONS = "customer//session/active";
-        String SESSION_INFO = "customer//session/{sessionId}";
+        String ACTIVE_SESSIONS = "customer/session/active";
+        String SESSION_INFO = "customer/session/{sessionId}";
         String PLACE_BET = "customer/session/{sessionId}/bet";
     }
 

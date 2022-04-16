@@ -26,7 +26,6 @@ import ru.TagAll.tenderHackBack.swagger.BadRequestSystemError;
 @Api(tags = "Работа с пользователем")
 public class CustomerController {
 
-
     /**
      * {@link CustomerService}.
      */
@@ -58,7 +57,7 @@ public class CustomerController {
 
     @BadRequestSystemError
     @PostMapping(value = Endpoints.Customer.PLACE_BET)
-    public void placeBet(@RequestBody Long sessionId) {
+    public void placeBet(@PathVariable Long sessionId) {
         customerService.placeManualBet(sessionId);
     }
 

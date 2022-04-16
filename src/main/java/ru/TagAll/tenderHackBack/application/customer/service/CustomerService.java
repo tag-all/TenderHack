@@ -48,5 +48,4 @@ public interface CustomerService {
      */
     void placeManualBet(Long sessionID);
 
-
 }
