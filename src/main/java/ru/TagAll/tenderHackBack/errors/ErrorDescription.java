@@ -14,12 +14,13 @@ import ru.TagAll.tenderHackBack.errors.model.ApplicationErrorDto;
 @RequiredArgsConstructor
 public enum ErrorDescription {
 
-    OUT_SYSTEM_ERROR(ErrorType.OUT_SYSTEM, "OUT_001", "Ошибка взаимодействия с внешней системой"),
-    OUT_SYSTEM_BET_ERROR(ErrorType.OUT_SYSTEM, "OUT_002", "Ваша ставка отклонена"),
+    OUT_SYSTEM_ERROR(ErrorType.OUT_SYSTEM, "OUT_001", "Ошибка взаимодействия с внешней системой."),
+    OUT_SYSTEM_BET_ERROR(ErrorType.OUT_SYSTEM, "OUT_002", "Ваша ставка отклонена."),
     CUSTOMER_FOUND(ErrorType.APP, "AUTH_001", "Пользователь уже зарегестирован."),
     CUSTOMER_NOT_FOUND(ErrorType.APP, "AUTH_002", "Пользователь не найден."),
     CUSTOMER_PASSWORD_ERROR(ErrorType.APP, "AUTH_003", "Указан неверный пароль."),
     CUSTOMER_LOGOUT_ERROR(ErrorType.APP, "AUTH_004", "Пользователь уже вышел."),
+    BOT_NOT_FOUNT(ErrorType.APP, "BOT_001", "Бот для этой сессии не найден."),
 
     UNAUTHORIZED_ACCESS(ErrorType.APP, "APP_001", "Неавторизованный доступ."),
     ACCESS_DENIED(ErrorType.APP, "APP_002","Недостаточно прав для доступа к ресурсу."),

@@ -8,4 +8,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author Iurii Babalin.
  */
 public interface BotSettingsRepository extends JpaRepository<BotSettings, Long> {
+    BotSettings getByCustomerIdAndSessionId(Long customerId, Long sessionId);
 }
