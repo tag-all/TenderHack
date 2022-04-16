@@ -70,21 +70,14 @@ public class AuthServiceImpl implements AuthService {
      * Регистрация в приложении.
      *
      * @param registrationDto модель паредачи данных пользователя для регистрации.
-     * @return 2 токена доступа.
      */
     @Override
-    public TokenDto registration(RegistrationDto registrationDto) {
+    public void registration(RegistrationDto registrationDto) {
         log.info("registration init()");
         ErrorDescription.CUSTOMER_FOUND.throwIfFalse(ObjectUtils.isEmpty(customerRepository
                 .getCustomerByEmail(registrationDto.getLogin())));
-        Customer customer = customerRepository.save(ConvertorUtils.convertRegistrationDtoToCustomer(registrationDto));
-        Token token = new Token();
-        token.setCustomer(customer);
-        token.setToken(jwtUtils.generateAccessToken(customer.getEmail().concat(customer.getPassword()
-                .concat(customer.getId().toString()))));
-        tokenRepository.save(token);
+        customerRepository.save(ConvertorUtils.convertRegistrationDtoToCustomer(registrationDto));
         log.info("registration completed");
-        return TokenDto.of(jwtUtils.generateToken(customer.getEmail()), token.getToken());
     }
 
     /**

@@ -32,12 +32,11 @@ public class AuthController {
      * Регистрация в приложении.
      *
      * @param registrationDto модель паредачи данных пользователя для регистрации.
-     * @return 2 токена доступа.
      */
     @BadRequestSystemError
     @PostMapping(value = Endpoints.Auth.REGISTRATION)
-    public TokenDto registration(@RequestBody RegistrationDto registrationDto) {
-        return authService.registration(registrationDto);
+    public void registration(@RequestBody RegistrationDto registrationDto) {
+        authService.registration(registrationDto);
     }
 
     /**

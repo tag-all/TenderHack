@@ -17,18 +17,27 @@ create table token
     token       text not null
 );
 
+create sequence status_session_seq start 1;
+create table status_session
+(
+    id          int primary key,
+    customer_id int references customer (id),
+    session_id  int         not null,
+    status      varchar(16) not null,
+    operating_mode boolean default false,
+);
+
 create sequence bot_settings_seq start 1;
 create table bot_settings
 (
     id          int primary key,
     customer_id int references customer (id),
-    session_id  int  not null,
+    status_session_id int references status_session (id),
     priority    int  not null,
     time_delay  time not null,
     time_start  time,
     step        real not null,
-    min_payment real not null,
-    status_work boolean default false
+    min_payment real not null
 );
 
 create sequence message_seq start 1;

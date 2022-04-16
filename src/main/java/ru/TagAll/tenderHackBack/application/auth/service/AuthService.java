@@ -24,9 +24,8 @@ public interface AuthService {
      * Регистрация в приложении.
      *
      * @param registrationDto модель паредачи данных пользователя для регистрации.
-     * @return 2 токена доступа.
      */
-    TokenDto registration(RegistrationDto registrationDto);
+    void registration(RegistrationDto registrationDto);
 
     /**
      * выход из приложения.
