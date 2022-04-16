@@ -21,7 +21,7 @@ import static org.springframework.util.StringUtils.hasText;
 @Component
 @RequiredArgsConstructor
 public class JwtFilter extends OncePerRequestFilter {
-    private static final String AUTHORIZATION = "Authorization";
+    public static final String AUTHORIZATION = "Authorization";
 
     private final JwtUtils jwtUtils;
 
@@ -35,7 +35,7 @@ public class JwtFilter extends OncePerRequestFilter {
         if (token != null && jwtUtils.validateToken(token)) {
             Customer customer = customerRepository.getCustomerByEmail(jwtUtils.getWordForToken(token));
             UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(customer,
-                    null);
+                    null, null);
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
         filterChain.doFilter(request, response);
