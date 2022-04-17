@@ -1,6 +1,7 @@
 package ru.TagAll.tenderHackBack.application.mailSender.service.impl;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 import ru.TagAll.tenderHackBack.application.mailSender.service.MailSender;
 
 import javax.mail.*;
@@ -11,7 +12,7 @@ import java.util.Properties;
 /**
  * @author Semyon Shibaev.
  */
-
+@Service
 public class MailSenderImpl implements MailSender {
 
     /**
@@ -21,14 +22,11 @@ public class MailSenderImpl implements MailSender {
      * @param messageText - текст сообщения
      */
 
-    @Value("@{mailSender.subject}")
-    private static String mesSubject;
+    private static String mesSubject = "Tag All - уведомление о котировочной сессии";
 
-    @Value("@{mailSender.userName}")
-    private static String userName;
+    private static String userName = "shibaev.job@gmail.com";
 
-    @Value("@{mailSender.password}")
-    private static String password;
+    private static String password = "nbabcegenjeynizx";
 
 
     @Override
