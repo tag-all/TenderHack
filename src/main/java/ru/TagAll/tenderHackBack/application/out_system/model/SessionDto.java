@@ -4,6 +4,9 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
+/**
+ * Модель сессии
+ */
 @Data
 public class SessionDto {
     private Long id;

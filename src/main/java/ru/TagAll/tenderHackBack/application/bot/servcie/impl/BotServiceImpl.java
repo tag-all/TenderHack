@@ -23,6 +23,8 @@ import java.time.LocalTime;
  * Реализация настроек бота.
  *
  * @author Iurii Babalin.
+ * @author Semyon Shibaev.
+ *
  */
 @Service
 @AllArgsConstructor
@@ -35,6 +37,12 @@ public class BotServiceImpl implements BotService {
 
     private final StatusSessionRepository statusSessionRepository;
 
+    /**
+     * запуск бота для конкретной сессии для конкретного пользователя
+     *
+     * @param sessionId - номер сессии для кокретного пользователя
+     */
+
     @Override
     public void startBot(Long sessionId) {
         Customer customer = (Customer) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -46,6 +54,12 @@ public class BotServiceImpl implements BotService {
         statusSessionRepository.save(statusSession);
     }
 
+    /**
+     * остановка бота для конкретной сессии для конкретного пользователя
+     *
+     * @param sessionId - номер сессии для кокретного пользователя
+     */
+
     @Override
     public void stopBot(Long sessionId) {
         Customer customer = (Customer) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -56,6 +70,13 @@ public class BotServiceImpl implements BotService {
         statusSession.setOperatingMode(false);
         statusSessionRepository.save(statusSession);
     }
+
+    /**
+     * сохранение настроек бота для конкретной сессии для конкретного пользователя
+     *
+     * @param sessionId - номер сессии для кокретного пользователя
+     * @param setting - настройки бота
+     */
 
     @Override
     public void settingBotSave(Long sessionId, BotSettingDto setting) {
@@ -106,6 +127,14 @@ public class BotServiceImpl implements BotService {
             statusSessionRepository.save(statusSession);
         }
     }
+
+    /**
+     * получение настроек бота для конкретной сессии конкретного пользователя
+     *
+     * @param sessionId - номер сессии для кокретного пользователя
+     * @return модель настроек бота
+     */
+
 
     @Override
     public BotSettingDto settingBotGet(Long sessionId) {

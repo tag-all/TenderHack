@@ -14,7 +14,7 @@ import ru.TagAll.tenderHackBack.application.out_system.model.SessionsDto;
  */
 public interface CustomerService {
     /**
-     * Получение данных опользователе.
+     * Получение данных о пользователе.
      *
      * @return {@link CustomerDto}.
      */
@@ -43,7 +43,7 @@ public interface CustomerService {
 
     /**
      * @param sessionId - id сессии
-     * @return реазультат - удалась ли ставка
+     * ставим ручную ставку
      */
     void placeManualBet(Long sessionId);
 

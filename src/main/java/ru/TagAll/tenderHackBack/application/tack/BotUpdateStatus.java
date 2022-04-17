@@ -33,6 +33,9 @@ public class BotUpdateStatus {
 
     private final TradingAlgorithm tradingAlgorithm;
 
+    /**
+     * Обновить данные для бота
+     */
     @Scheduled(cron = "0/1 * * * * *")
     public void updateDelay() {
         botSettingsRepository.getFullActiveSession().forEach(it -> {

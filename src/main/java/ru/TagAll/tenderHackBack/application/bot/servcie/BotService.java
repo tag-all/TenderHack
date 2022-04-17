@@ -1,11 +1,6 @@
 package ru.TagAll.tenderHackBack.application.bot.servcie;
 
-import ru.TagAll.tenderHackBack.application.bot.domain.BotSettings;
 import ru.TagAll.tenderHackBack.application.bot.model.BotSettingDto;
-import ru.TagAll.tenderHackBack.application.bot.model.DelayDto;
-import ru.TagAll.tenderHackBack.application.common.Endpoints;
-
-import java.util.List;
 
 /**
  * @author Semyon Shibaev.

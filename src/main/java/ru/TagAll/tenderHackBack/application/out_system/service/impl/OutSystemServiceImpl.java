@@ -2,11 +2,9 @@ package ru.TagAll.tenderHackBack.application.out_system.service.impl;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import lombok.val;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import ru.TagAll.tenderHackBack.application.out_system.model.SessionDto;
@@ -15,6 +13,11 @@ import ru.TagAll.tenderHackBack.application.out_system.service.OutSystemService;
 import ru.TagAll.tenderHackBack.config.OutSystemConfiguration;
 import ru.TagAll.tenderHackBack.errors.ErrorDescription;
 
+/**
+ * Получение сессий из внешней системы
+ *
+ * @author Iurii Babalin.
+ */
 @Slf4j
 @Service
 @AllArgsConstructor
@@ -29,6 +32,12 @@ public class OutSystemServiceImpl implements OutSystemService {
      */
     private final OutSystemConfiguration outSystemConfiguration;
 
+    /**
+     * Получение сессии по типу
+     * @param sessionType - тип сессии
+     * @param customerKey - ключ пользователя
+     * @return модель сесиии
+     */
     @Override
     public SessionsDto getSessionByType(String sessionType, String customerKey) {
         String url = outSystemConfiguration.getUrl().concat(outSystemConfiguration.getEndpoints().getGetSessions());
@@ -40,6 +49,11 @@ public class OutSystemServiceImpl implements OutSystemService {
                 SessionsDto.class, sessionType).getBody();
     }
 
+    /**
+     * Получение сессии по id
+     * @param sessionId - айдишник сессии
+     * @return модель сесиии
+     */
     @Override
     public SessionDto getSessionById(Long sessionId) {
         String url = outSystemConfiguration.getUrl().concat(outSystemConfiguration.getEndpoints().getGetSession());
@@ -50,6 +64,11 @@ public class OutSystemServiceImpl implements OutSystemService {
                 SessionDto.class, sessionId).getBody();
     }
 
+    /**
+     * Поставить ставку в конкретной сессии
+     * @param sessionId - айдишник сессии
+     * @param customerKey - ключ пользователя
+     */
     @Override
     public void betToSession(Long sessionId, String customerKey) {
         String url = outSystemConfiguration.getUrl().concat(outSystemConfiguration.getEndpoints().getMakeBet());
