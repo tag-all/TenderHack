@@ -35,12 +35,14 @@ public class MailSenderImpl implements MailSender {
     public void sendMail(String mail, String messageText) throws MessagingException {
 
         Properties properties = new Properties();
-        properties.put("mail.smtp.host", "smtp.yandex.ru");
+        properties.put("mail.smtp.host", "smtp.gmail.com");
+        properties.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+        properties.put("mail.smtp.starttls.enable", "true");
+        properties.put("mail.smtp.ssl.protocols", "TLSv1.2");
         properties.put("mail.smtp.auth", "true");
-        properties.put("mail.smtp.socketFactory.port", "465");
-        properties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        properties.put("mail.smtp.socketFactory.port", "587");
 
-        Session session = Session.getDefaultInstance(properties,
+        Session session = Session.getInstance(properties,
                 //Аутентификатор - объект, который передает логин и пароль
                 new Authenticator() {
                     @Override
