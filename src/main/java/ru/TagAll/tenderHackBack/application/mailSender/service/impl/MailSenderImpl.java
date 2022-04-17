@@ -1,4 +1,4 @@
-package ru.TagAll.tenderHackBack.application.mailSender.service.imp;
+package ru.TagAll.tenderHackBack.application.mailSender.service.impl;
 
 import org.springframework.beans.factory.annotation.Value;
 import ru.TagAll.tenderHackBack.application.mailSender.service.MailSender;
@@ -12,7 +12,7 @@ import java.util.Properties;
  * @author Semyon Shibaev.
  */
 
-public class MailSenderImp implements MailSender {
+public class MailSenderImpl implements MailSender {
 
     /**
      * Реализация почтового клиента

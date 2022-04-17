@@ -3,6 +3,9 @@ package ru.TagAll.tenderHackBack.application.bot.servcie;
 import ru.TagAll.tenderHackBack.application.bot.domain.BotSettings;
 import ru.TagAll.tenderHackBack.application.bot.model.BotSettingDto;
 import ru.TagAll.tenderHackBack.application.bot.model.DelayDto;
+import ru.TagAll.tenderHackBack.application.common.Endpoints;
+
+import java.util.List;
 
 /**
  * @author Semyon Shibaev.
@@ -29,4 +32,13 @@ public interface BotService {
      */
     BotSettingDto settingBotGet(Long sessionId);
 
+    /**
+     * получение id всех активных сессий
+     */
+    List<Integer> getAllActiveSession();
+
+    /**
+     * получение всех ботов для конкретной сессии
+     */
+    List<BotSettings> getAllBotsForSession(Long sessionId);
 }

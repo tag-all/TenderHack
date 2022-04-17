@@ -14,6 +14,8 @@ import ru.TagAll.tenderHackBack.application.out_system.service.OutSystemService;
 import ru.TagAll.tenderHackBack.errors.ErrorDescription;
 
 import java.sql.Time;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Реализация настроек бота.
@@ -77,7 +79,17 @@ public class BotServiceImpl implements BotService {
         return convertToBotSettingDto(botSettingsRepository.getByCustomerIdAndSessionId(customer.getId(), sessionId));
     }
 
-    private BotSettingDto convertToBotSettingDto(BotSettings botSettings){
+    @Override
+    public List<Integer> getAllActiveSession() {
+       return botSettingsRepository.getAllActiveSession();
+    }
+
+    @Override
+    public List<BotSettings> getAllBotsForSession(Long sessionId) {
+        return botSettingsRepository.getAllBySessionId(sessionId);
+    }
+
+    private BotSettingDto convertToBotSettingDto(BotSettings botSettings) {
         BotSettingDto botSettingDto = new BotSettingDto();
         botSettingDto.setId(botSettings.getId());
         botSettingDto.setPriority(botSettings.getPriority());
