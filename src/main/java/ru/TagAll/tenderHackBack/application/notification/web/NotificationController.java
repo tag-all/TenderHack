@@ -20,11 +20,19 @@ public class NotificationController {
 
     private final NotificationServiceImpl noticeService;
 
+    /**
+     * Получение листа уведомлений по типу
+     */
+
     @BadRequestSystemError
     @GetMapping(value = Endpoints.Notice.NOTICES_BY_TYPE)
     public List<NotificationDto> getNoticeByType(@PathVariable String notificationType) {
         return noticeService.getNoticeByType(notificationType);
     }
+
+    /**
+     * Получение количества уведомлений по типу
+     */
 
     @BadRequestSystemError
     @GetMapping(value = Endpoints.Notice.COUNTING_NOTICES)

@@ -5,8 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import ru.TagAll.tenderHackBack.application.customer.domain.Customer;
-import ru.TagAll.tenderHackBack.application.customer.domain.CustomerRepository;
-import ru.TagAll.tenderHackBack.application.notification.domain.MessageRepository;
 import ru.TagAll.tenderHackBack.application.notification.domain.Notification;
 import ru.TagAll.tenderHackBack.application.notification.domain.NotificationRepository;
 import ru.TagAll.tenderHackBack.application.notification.model.NotificationDto;
@@ -29,6 +27,12 @@ public class NotificationServiceImpl implements NotificationService {
 
     private final NotificationRepository notificationRepository;
 
+    /**
+     *
+     * @param noticeType тип уведомления
+     * @return лист уведомлений по типу
+     */
+
     @Override
     public List<NotificationDto> getNoticeByType(String noticeType) {
         Customer customer = (Customer) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -36,6 +40,10 @@ public class NotificationServiceImpl implements NotificationService {
         return convertNoticeToNoticeDto(notifications);
     }
 
+    /**
+     * @param noticeType тип уведомления
+     * @return количество уведомлений по типу
+     */
 
     @Override
     public int getCountTypedNotice(String noticeType) {

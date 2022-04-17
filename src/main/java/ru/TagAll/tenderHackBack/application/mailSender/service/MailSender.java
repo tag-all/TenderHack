@@ -10,5 +10,13 @@ import javax.mail.internet.AddressException;
 
 public interface MailSender {
 
+    /**
+     * Отправка сообщений на почту
+     * @param mail - почта получателя
+     * @param messageText - тело письма
+     * @throws MessagingException
+     */
+
     void sendMail(String mail, String messageText) throws MessagingException;
+
 }

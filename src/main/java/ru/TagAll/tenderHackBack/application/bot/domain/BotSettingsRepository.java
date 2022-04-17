@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 /**
- * ИНтерфейс работы с настройками бота.
+ * Интерфейс работы с настройками бота.
  *
  * @author Iurii Babalin.
  */

@@ -18,6 +18,7 @@ import ru.TagAll.tenderHackBack.application.customer.service.CustomerService;
 /**
  * Контроллер работы с пользователем.
  *
+ * @author Semyon Shibaev.
  * @author Iurii Babalin.
  */
 @RestController
@@ -30,42 +31,64 @@ public class CustomerController {
      */
     private final CustomerService customerService;
 
+    /**
+     * Получение активных сессий
+     */
     @BadRequestSystemError
     @GetMapping(value = Endpoints.Customer.ACTIVE_SESSIONS)
     public SessionsDto getActiveSessions() {
         return customerService.getAllActiveSessions();
     }
 
+    /**
+     * Обновление профиля пользователя.
+     */
     @BadRequestSystemError
     @PostMapping(Endpoints.Customer.PROFILE_UPDATE)
     public void updateProfile(@RequestBody CustomerDto customerDto){
         customerService.updateProfile(customerDto);
     }
 
+    /**
+     * Получение сессий в ручном режиме
+     */
     @BadRequestSystemError
     @GetMapping(value = Endpoints.Customer.MANUAL_SESSIONS)
     public SessionsDto getManualSessions() {
         return customerService.getAllManualSessions();
     }
 
+
+    /**
+     * Получение сессий в автоматическом режиме
+     */
     @BadRequestSystemError
     @GetMapping(value = Endpoints.Customer.AUTO_SESSIONS)
     public SessionsAuto getAutoSessions() {
         return customerService.getAllAutoSessions();
     }
 
+    /**
+     * Получение информации о сессии
+     */
     @BadRequestSystemError
     @GetMapping(value = Endpoints.Customer.SESSION_INFO)
     public SessionDto getSessionInfo(@PathVariable Long sessionId) {
         return customerService.getSessionInfo(sessionId);
     }
 
+    /**
+     * Поставить ставку
+     */
     @BadRequestSystemError
     @PostMapping(value = Endpoints.Customer.PLACE_BET)
     public void placeBet(@PathVariable Long sessionId) {
         customerService.placeManualBet(sessionId);
     }
 
+    /**
+     * Получение данных о пользователе.
+     */
     @BadRequestSystemError
     @GetMapping(Endpoints.Customer.GET_CUSTOMER_PROFILE)
     public CustomerDto getProfile(){

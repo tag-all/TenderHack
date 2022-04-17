@@ -1,6 +1,5 @@
 package ru.TagAll.tenderHackBack.application.auth.service;
 
-import org.springframework.web.bind.annotation.RequestBody;
 import ru.TagAll.tenderHackBack.application.auth.model.AccessDto;
 import ru.TagAll.tenderHackBack.application.auth.model.RegistrationDto;
 import ru.TagAll.tenderHackBack.application.auth.model.TokenDto;

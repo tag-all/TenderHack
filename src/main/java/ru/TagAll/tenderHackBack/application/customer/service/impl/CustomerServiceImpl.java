@@ -58,12 +58,18 @@ public class CustomerServiceImpl implements CustomerService {
         return ConvertorUtils.convertCustomerToCustomerDto(customer);
     }
 
+    /**
+     * @return активные сессии
+     */
     @Override
     public SessionsDto getAllActiveSessions() {
         Customer customer = (Customer) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return outSystemService.getSessionByType("ACTIVE", customer.getAccessKey());
     }
 
+    /**
+     * @return сессии в ручном режиме
+     */
     @Override
     public SessionsDto getAllManualSessions() {
         Customer customer = (Customer) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -74,6 +80,9 @@ public class CustomerServiceImpl implements CustomerService {
         return sessionsDto;
     }
 
+    /**
+     * @return сессии в автоматическом режиме
+     */
     @Override
     public SessionsAuto getAllAutoSessions() {
         Customer customer = (Customer) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -88,12 +97,20 @@ public class CustomerServiceImpl implements CustomerService {
         return sessionsAuto;
     }
 
+    /**
+     * @param sessionId - id сессии
+     * @return инфрормацию о сессии
+     */
     @Override
     public SessionDto getSessionInfo(Long sessionId) {
         Customer customer = (Customer) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return outSystemService.getSessionById(sessionId);
     }
 
+    /**
+     * @param sessionId - id сессии
+     * @return реазультат - удалась ли ставка
+     */
     @Override
     public void placeManualBet(Long sessionId) {
         Customer customer = (Customer) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -107,6 +124,9 @@ public class CustomerServiceImpl implements CustomerService {
         outSystemService.betToSession(sessionId, customer.getAccessKey());
     }
 
+    /**
+     * Обновление профиля пользователя.
+     */
     @Override
     public void updateProfile(CustomerDto customerDto) {
         Customer customer = (Customer) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

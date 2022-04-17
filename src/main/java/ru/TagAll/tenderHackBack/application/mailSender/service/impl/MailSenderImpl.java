@@ -1,6 +1,5 @@
 package ru.TagAll.tenderHackBack.application.mailSender.service.impl;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import ru.TagAll.tenderHackBack.application.mailSender.service.MailSender;
 

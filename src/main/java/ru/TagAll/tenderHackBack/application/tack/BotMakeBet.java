@@ -27,6 +27,10 @@ public class BotMakeBet {
 
     private final OutSystemService outSystemService;
 
+    /**
+     * Сделать автоматическую ставку с помощью бота
+     */
+
     @Scheduled(cron = "0/3 * * * * *")
     public void makeBet() {
         botSettingsRepository.getFullActiveSession().forEach(it -> {

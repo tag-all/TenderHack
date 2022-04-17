@@ -5,6 +5,8 @@ import lombok.Data;
 
 /**
  * Модель сообщения для пользователя.
+ *
+ * @author Semyon Shibaev
  */
 
 @Data

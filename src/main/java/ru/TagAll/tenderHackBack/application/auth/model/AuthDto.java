@@ -4,7 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 /**
- * Модель для переданы данных пользователя на фвторизацию.
+ * Модель для передачи данных пользователя на фвторизацию.
  *
  * @author Iurii Babalin.
  */

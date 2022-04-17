@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import ru.TagAll.tenderHackBack.application.auth.domain.Token;
 import ru.TagAll.tenderHackBack.application.customer.domain.Customer;
 
 import javax.persistence.CascadeType;
@@ -16,15 +15,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import java.sql.Time;
-import java.util.List;
+
 
 /**
- * Модель настроек бота.
+ * Статус сессии - информацию о сессиях
+ * мы получаем из внешних систем
  *
  * @author Iurii Babalin.
  */

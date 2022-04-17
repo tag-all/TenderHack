@@ -1,7 +1,5 @@
 package ru.TagAll.tenderHackBack.application.automationTrading;
 
-import java.sql.Date;
-
 /**
  * алгоритмы для автоматизация трейдинга
  *

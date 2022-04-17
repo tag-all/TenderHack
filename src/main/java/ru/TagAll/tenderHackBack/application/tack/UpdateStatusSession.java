@@ -27,6 +27,9 @@ public class UpdateStatusSession {
 
     private final MailSender mailSender;
 
+    /**
+     * Обновить сессии и завершить в случае, если они закрыты
+     */
     @Scheduled(cron = "0/2 * * * * *")
     public void updateStatusAndSendNotification() {
         botSettingsRepository.getFullActiveSession().forEach(it -> {

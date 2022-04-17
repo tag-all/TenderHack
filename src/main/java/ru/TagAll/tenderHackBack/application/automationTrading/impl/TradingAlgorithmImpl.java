@@ -25,7 +25,7 @@ public class TradingAlgorithmImpl implements TradingAlgorithm {
      * экспотенциальную нашу формулу успеха:
      * 0.5 * e^(-0.05 * (100 - minPrice/currentPrice * 100)+5)
      *
-     * @return
+     * @return задержку в секундах
      */
 
     @Override
