@@ -51,6 +51,9 @@ public class BotSettings {
     @Column(name = "time_delay")
     private Time timeDelay;
 
+    @Column(name = "time_start")
+    private Time timeStart;
+
     @Column(name = "step")
     private Double step;
 

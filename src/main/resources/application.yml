@@ -27,7 +27,8 @@ jwt:
   secret: "t$%^en@der112HAcK@##"
 
 out-system:
-  url: "https://emulate-tender-hack.herokuapp.com/api/v1"
+  #url: "https://emulate-tender-hack.herokuapp.com/api/v1"
+  url: "http://localhost:10550/api/v1"
   key: "2db75760-bd8f-11ec-9d64-0242ac120002"
   endpoints:
     get-sessions: "/sessions/{sessionType}"

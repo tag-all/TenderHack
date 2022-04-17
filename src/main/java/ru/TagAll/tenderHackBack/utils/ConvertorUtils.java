@@ -8,6 +8,7 @@ import ru.TagAll.tenderHackBack.application.notification.domain.Notification;
 import ru.TagAll.tenderHackBack.application.notification.model.NotificationDto;
 
 import java.sql.Time;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,5 +42,9 @@ public class ConvertorUtils {
         customerDto.setNotificationDelay(customer.getNotificationTime().toString());
         customerDto.setAccessKey(customer.getAccessKey());
         return customerDto;
+    }
+
+    public static Time getTimeNot(){
+        return Time.valueOf(LocalTime.now());
     }
 }

@@ -1,5 +1,7 @@
 package ru.TagAll.tenderHackBack.application.automationTrading;
 
+import java.sql.Date;
+
 /**
  * алгоритмы для автоматизация трейдинга
  *
@@ -21,6 +23,6 @@ public interface TradingAlgorithm {
      * @return время в секундах, через которую нужно сделать следующую ставку
      */
 
-    double getDelayForNextBetInLastFiveMinutes(double currentBet, double minimumUserBet, Priority priority);
+    long getDelayForNextBetInLastFiveMinutes(double currentBet, double minimumUserBet, long priority);
 
 }

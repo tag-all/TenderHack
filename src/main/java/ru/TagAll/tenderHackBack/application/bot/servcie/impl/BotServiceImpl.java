@@ -17,8 +17,7 @@ import ru.TagAll.tenderHackBack.application.out_system.service.OutSystemService;
 import ru.TagAll.tenderHackBack.errors.ErrorDescription;
 
 import java.sql.Time;
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalTime;
 
 /**
  * Реализация настроек бота.
@@ -65,7 +64,7 @@ public class BotServiceImpl implements BotService {
         BotSettings botSettings = null;
         if (ObjectUtils.isEmpty(statusSession)) {
             ErrorDescription.BOT_NOT_FOUNT.throwIfTrue(!ObjectUtils.isEmpty(setting.getId()));
-            SessionDto sessionDto = outSystemService.getSessionById(sessionId, customer.getAccessKey());
+            SessionDto sessionDto = outSystemService.getSessionById(sessionId);
             statusSession = new StatusSession();
             statusSession.setCustomer(customer);
             statusSession.setSessionId(sessionId);
@@ -78,12 +77,17 @@ public class BotServiceImpl implements BotService {
             botSettings.setPriority(setting.getPriority());
             botSettings.setMinPayment(setting.getMinPay());
             botSettings.setTimeDelay(Time.valueOf(setting.getTimeDelay()));
+            botSettings.setTimeStart(Time.valueOf(String.valueOf(LocalTime.now().getHour())
+                    .concat(":")
+                    .concat(String.valueOf(LocalTime.now().getMinute()))
+                    .concat(":")
+                    .concat(String.valueOf(LocalTime.now().getSecond()))));
             statusSession.setBotSettings(botSettings);
             statusSessionRepository.save(statusSession);
         } else {
             botSettings = botSettingsRepository.getByStatusSession(statusSession);
             if (ObjectUtils.isEmpty(botSettings)) {
-                SessionDto sessionDto = outSystemService.getSessionById(sessionId, customer.getAccessKey());
+                SessionDto sessionDto = outSystemService.getSessionById(sessionId);
                 botSettings = new BotSettings();
                 botSettings.setCustomer(customer);
                 botSettings.setStatusSession(statusSession);
@@ -93,6 +97,11 @@ public class BotServiceImpl implements BotService {
             botSettings.setPriority(setting.getPriority());
             botSettings.setMinPayment(setting.getMinPay());
             botSettings.setTimeDelay(Time.valueOf(setting.getTimeDelay()));
+            botSettings.setTimeStart(Time.valueOf(String.valueOf(LocalTime.now().getHour())
+                    .concat(":")
+                    .concat(String.valueOf(LocalTime.now().getMinute()))
+                    .concat(":")
+                    .concat(String.valueOf(LocalTime.now().getSecond()))));
             statusSession.setBotSettings(botSettings);
             statusSessionRepository.save(statusSession);
         }

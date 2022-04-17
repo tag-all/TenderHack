@@ -41,10 +41,9 @@ public class OutSystemServiceImpl implements OutSystemService {
     }
 
     @Override
-    public SessionDto getSessionById(Long sessionId, String customerKey) {
+    public SessionDto getSessionById(Long sessionId) {
         String url = outSystemConfiguration.getUrl().concat(outSystemConfiguration.getEndpoints().getGetSession());
         HttpHeaders headers = new HttpHeaders();
-        headers.add("CustomerKey", "Key: ".concat(customerKey));
         headers.add("SystemKey", "Key: ".concat(outSystemConfiguration.getKey()));
         HttpEntity<String> requestEntity = new HttpEntity<>(headers);
         return outSystemRestTemplate.exchange(url, HttpMethod.GET, requestEntity,

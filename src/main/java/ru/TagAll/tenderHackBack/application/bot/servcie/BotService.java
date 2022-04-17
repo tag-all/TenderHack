@@ -31,14 +31,4 @@ public interface BotService {
      * сохранение настроек бота для конкретной сессии
      */
     BotSettingDto settingBotGet(Long sessionId);
-
-    /**
-     * получение id всех активных сессий
-     */
-    List<Integer> getAllActiveSession();
-
-    /**
-     * получение всех ботов для конкретной сессии
-     */
-    List<BotSettings> getAllBotsForSession(Long sessionId);
 }

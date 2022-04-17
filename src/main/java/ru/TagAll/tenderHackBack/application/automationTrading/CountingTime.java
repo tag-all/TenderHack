@@ -26,8 +26,6 @@ public class CountingTime {
         return (int) Math.round(seconds / sumSteps);
     }
 
-    ;
-
     /**
      * подсчет для среднего приоритета
      */
@@ -56,5 +54,4 @@ public class CountingTime {
         return (int) Math.round(seconds / sumSteps) * 4;
     }
 
-    ;
 }

@@ -69,7 +69,7 @@ public class CustomerServiceImpl implements CustomerService {
         Customer customer = (Customer) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         SessionsDto sessionsDto = new SessionsDto();
         sessionsDto.setSessions(statusSessionRepository.getAllByCustomerAndAndOperatingMode(customer, false)
-                .stream().map(it -> outSystemService.getSessionById(it.getSessionId(), customer.getAccessKey()))
+                .stream().map(it -> outSystemService.getSessionById(it.getSessionId()))
                 .collect(Collectors.toList()));
         return sessionsDto;
     }
@@ -80,8 +80,7 @@ public class CustomerServiceImpl implements CustomerService {
         SessionsAuto sessionsAuto = new SessionsAuto();
         sessionsAuto.setSessions(statusSessionRepository.getAllByCustomerAndAndOperatingMode(customer, true)
                 .stream().map(it -> {
-                    SessionAuto sessionAuto = convertToSessionAuto(outSystemService.getSessionById(it.getSessionId(),
-                            customer.getAccessKey()));
+                    SessionAuto sessionAuto = convertToSessionAuto(outSystemService.getSessionById(it.getSessionId()));
                     sessionAuto.setBotSettingDto(convertToBotSettingDto(botSettingsRepository.getByStatusSession(it)));
                     return sessionAuto;
                 })
@@ -92,13 +91,13 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public SessionDto getSessionInfo(Long sessionId) {
         Customer customer = (Customer) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return outSystemService.getSessionById(sessionId, customer.getAccessKey());
+        return outSystemService.getSessionById(sessionId);
     }
 
     @Override
     public void placeManualBet(Long sessionId) {
         Customer customer = (Customer) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        SessionDto sessionDto = outSystemService.getSessionById(sessionId, customer.getAccessKey());
+        SessionDto sessionDto = outSystemService.getSessionById(sessionId);
         StatusSession statusSession = new StatusSession();
         statusSession.setCustomer(customer);
         statusSession.setSessionId(sessionId);
