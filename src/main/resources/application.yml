@@ -7,9 +7,9 @@ spring:
   datasource:
     platform: postgres
     driverClassName: org.postgresql.Driver
-    url: jdbc:postgresql://ec2-52-48-159-67.eu-west-1.compute.amazonaws.com/dffvicsks1i8v6
-    username: wkbvnhaqrxrioo
-    password: 72c1517ee7bfa1a4cd801bcb3efb20187f0e8a95d5c1282f1223b68cd9ad54f8
+    url: jdbc:postgresql://ec2-52-73-155-171.compute-1.amazonaws.com/d9kao418qo0g18
+    username: unxvhgodexwjso
+    password: c2d724793499afa0a047805d2064e0e4a754720c726ae07e24a315a4cf14692d
   jpa:
     database: POSTGRESQL
     hibernate:
