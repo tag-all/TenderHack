@@ -13,6 +13,8 @@ import ru.TagAll.tenderHackBack.application.bot.servcie.BotService;
 import ru.TagAll.tenderHackBack.application.common.Endpoints;
 import ru.TagAll.tenderHackBack.swagger.BadRequestSystemError;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @Api(tags = "Контроллер натсройки бота")
@@ -44,5 +46,6 @@ public class BotController {
     public BotSettingDto settingBotGet(@PathVariable Long sessionId) {
         return botService.settingBotGet(sessionId);
     }
+    
 
 }

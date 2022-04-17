@@ -17,6 +17,8 @@ import ru.TagAll.tenderHackBack.application.out_system.service.OutSystemService;
 import ru.TagAll.tenderHackBack.errors.ErrorDescription;
 
 import java.sql.Time;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Реализация настроек бота.
