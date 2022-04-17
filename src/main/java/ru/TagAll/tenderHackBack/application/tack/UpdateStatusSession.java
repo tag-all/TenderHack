@@ -28,7 +28,7 @@ public class UpdateStatusSession {
     private final MailSender mailSender;
 
     @Scheduled(cron = "0/2 * * * * *")
-    public void updateDelay() {
+    public void updateStatusAndSendNotification() {
         botSettingsRepository.getFullActiveSession().forEach(it -> {
             SessionDto sessionDto = outSystemService.getSessionById(it);
             statusSessionRepository.findAllBySessionId(it).forEach(is -> {
